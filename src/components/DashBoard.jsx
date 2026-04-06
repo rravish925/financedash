@@ -92,8 +92,8 @@ function DashBoard({transaction}) {
     // Role
     const [role, setRole] = useState("Admin");
     return (
-    <div className=' p-12 font-semibold text-xl min-h-screen'>
-      <h1 className='flex flex-wrap justify-center font-bold text-3xl'>Finance Dashboard</h1>
+    <div className='p-4 md:p-8 font-semibold text-sm md:text-lg min-h-screen'>
+      <h1 className='flex flex-wrap justify-center font-bold text-xl md:text-3xl'>Finance Dashboard</h1>
 
       <div className="flex justify-between items-center">
         <h2 className='text-2xl font-semibold pt-10'>Dashboard Overview</h2>
@@ -102,30 +102,30 @@ function DashBoard({transaction}) {
           <option value="User">User</option>
         </select>
       </div>
-      <div className='h-56 border-t-2 mt-5 flex flex-wrap justify-around pt-10'>
+      <div className='border-t-2 mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-10'>
 
-        <div className='w-96 h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
+        <div className='w-full h-52 md:h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
           <div>
             <p className='pb-5 text-2xl'>Total Income</p>
             <p className='text-3xl font-bold'>₹{Income}</p>
           </div>  
-          <img src={walletImg} alt='wallet' className='object-cover w-44 h-44 mt-14' />  
+          <img src={walletImg} alt='wallet' className='object-coverw-20 h-20 md:w-32 md:h-32 mt-14' />  
         </div>
          
-        <div className='w-96 h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
+        <div className='w-full h-52 md:h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
           <div>
             <p className='pb-5 text-2xl'>Total Expense</p>
             <p className='text-3xl font-bold'>₹{Expense}</p>
           </div>  
-          <img src={expenseImg} alt='wallet' className='object-cover w-32 h-32 mt-5' />  
+          <img src={expenseImg} alt='wallet' className='object-cover w-20 h-20 md:w-28 md:h-28 mt-5' />  
         </div>
 
-        <div className='w-96 h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
+        <div className='w-full h-52 md:h-60 border-2 rounded-xl m-8 shadow-lg flex justify-between items-center p-4'>
           <div>
             <p className='pb-5 text-2xl'>Total Balance</p>
             <p className='text-3xl font-bold'>₹{balance}</p>
           </div>  
-          <img src={balanceImg} alt='wallet' className='object-cover w-40 h-40 mt-5' />  
+          <img src={balanceImg} alt='wallet' className='object-coverw-20 h-20 md:w-40 md:h-40 mt-5' />  
         </div> 
       </div>
 
@@ -134,9 +134,9 @@ function DashBoard({transaction}) {
         <h2 className='text-2xl font-semibold mb-5'>Transaction</h2>
         <hr className='border border-gray-200'></hr>
         <div className='mt-5 flex wrap gap-7'>
-          <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} alt='Search Items' placeholder='Search by Category...' className='w-5/6 h-11 border-2 rounded-lg p-4' />
+          <input type='text' value={search} onChange={(e) => setSearch(e.target.value)} alt='Search Items' placeholder='Search by Category...' className='w-full md:w-3/4 h-11 border-2 rounded-lg p-4' />
           {role === 'Admin' && (
-          <button className="w-52 h-11 border-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white" onClick={() => setShowForm(true)}>Add Transaction</button>
+          <button className="w-full md:w-1/4 h-11 border-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white" onClick={() => setShowForm(true)}>Add Transaction</button>
           )}
         </div>
       </div>
@@ -160,7 +160,7 @@ function DashBoard({transaction}) {
       )}
   {/* Table design */}
       <div className='border-2 rounded-lg mt-8'>
-        <table className='w-full text-left'>
+        <table className='w-full min-w-[600px] text-left'>
           <thead className='bg-slate-50'>
             <tr className='h-12'>
               <th className='pl-3'>Date</th>
@@ -208,7 +208,8 @@ function DashBoard({transaction}) {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-10'>
           <div className='bg-white rounded-2xl shadow-lg p-6 mt-10 w-fit mx-auto flex-col justify-center items-center'>
             <h2 className='text-xl font-semibold text-center mb-4'>Income vs Expense</h2>
-            <PieChart width={400} height={350}>
+            <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
               <Pie
                 data={chartData}
                 cx="50%"
@@ -227,6 +228,7 @@ function DashBoard({transaction}) {
               <Tooltip />
               <Legend />
               </PieChart>
+              </ResponsiveContainer>  
             </div>
     {/* chart 2 */}
           <div className='bg-white rounded-2xl shadow-lg p-6 mt-10 w-full max-w-2xl mx-auto'>
